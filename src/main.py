@@ -4,6 +4,13 @@ from pyswip import Prolog
 from tabulate import tabulate
 import mailtrap as mt
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+MAILTRAP_API_TOKEN = os.getenv('MAILTRAP_API_TOKEN')
+
 # Connects to the mysql server
 db_connector = connector.connect(
     host="localhost",
@@ -411,7 +418,7 @@ def send_email(receiver, subject, message) -> None:
         text=message
     )
 
-    client = mt.MailtrapClient(token="17c83627dc411b149aa8e7e009f2ef2f")
+    client = mt.MailtrapClient(token=MAILTRAP_API_TOKEN)
     client.send(mail)
 
 
